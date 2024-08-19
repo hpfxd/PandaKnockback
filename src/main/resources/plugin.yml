@@ -2,10 +2,12 @@ main: com.hpfxd.pandaknockback.KnockbackPlugin
 version: "${version}"
 name: PandaKnockback
 description: "${description}"
-load: STARTUP
 authors:
   - hpfxd
 website: "https://github.com/hpfxd/PandaKnockback"
+
+softdepend:
+  - WorldGuard
 
 commands:
   pandaknockback:

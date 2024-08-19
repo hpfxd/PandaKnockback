@@ -5,6 +5,7 @@ import com.hpfxd.pandaknockback.command.CommandExecutionHandler;
 import com.hpfxd.pandaknockback.command.EditProfileSubcommand;
 import com.hpfxd.pandaknockback.command.ReloadSubcommand;
 import com.hpfxd.pandaknockback.command.Subcommand;
+import com.hpfxd.pandaknockback.integration.worldguard.WorldGuardIntegration;
 import com.hpfxd.pandaknockback.internal.ProfileService;
 import com.hpfxd.pandaknockback.profile.KnockbackProfileService;
 import org.bukkit.Bukkit;
@@ -17,6 +18,13 @@ import java.util.List;
 
 public class KnockbackPlugin extends JavaPlugin {
     @Override
+    public void onLoad() {
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            WorldGuardIntegration.registerFlag();
+        }
+    }
+
+    @Override
     public void onEnable() {
         this.saveDefaultConfig();
         this.reloadConfig();
@@ -24,6 +32,10 @@ public class KnockbackPlugin extends JavaPlugin {
         this.setupAttackListener();
         this.setupProfileService();
         this.registerCommand();
+
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            WorldGuardIntegration.registerHandler();
+        }
     }
 
     private void setupAttackListener() {
