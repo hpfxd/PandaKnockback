@@ -1,0 +1,61 @@
+package com.hpfxd.pandaknockback;
+
+import com.hpfxd.pandaknockback.command.ApplyProfileSubcommand;
+import com.hpfxd.pandaknockback.command.CommandExecutionHandler;
+import com.hpfxd.pandaknockback.command.EditProfileSubcommand;
+import com.hpfxd.pandaknockback.command.ReloadSubcommand;
+import com.hpfxd.pandaknockback.command.Subcommand;
+import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.profile.KnockbackProfileService;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.ServicePriority;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class KnockbackPlugin extends JavaPlugin {
+    @Override
+    public void onEnable() {
+        this.saveDefaultConfig();
+        this.reloadConfig();
+
+        this.setupAttackListener();
+        this.setupProfileService();
+        this.registerCommand();
+    }
+
+    private void setupAttackListener() {
+        final AttackListener attackListener = new AttackListener();
+
+        Bukkit.getPluginManager().registerEvents(attackListener, this);
+        Bukkit.getScheduler().runTaskTimer(this, attackListener, 0, 0);
+    }
+
+    private void setupProfileService() {
+        final ProfileService profileService = new ProfileService(this);
+        Bukkit.getPluginManager().registerEvents(profileService, this);
+        Bukkit.getServicesManager().register(KnockbackProfileService.class, profileService, this, ServicePriority.Lowest);
+
+        final ProfileApplicationHandler applicationHandler = new ProfileApplicationHandler(Bukkit.getServicesManager().load(KnockbackProfileService.class));
+        Bukkit.getPluginManager().registerEvents(applicationHandler, this);
+    }
+
+    private void registerCommand() {
+        final List<Subcommand> subcommands = new ArrayList<>();
+
+        final KnockbackProfileService registeredService = Bukkit.getServicesManager().load(KnockbackProfileService.class);
+        if (registeredService instanceof ProfileService) {
+            final ProfileService profileService = (ProfileService) registeredService;
+
+            // these subcommands require the built-in ProfileService to be used
+
+            subcommands.add(new ApplyProfileSubcommand(profileService));
+            subcommands.add(new EditProfileSubcommand(profileService, YamlConfiguration.loadConfiguration(this.getTextResource("profiles.yml")).getConfigurationSection("default")));
+            subcommands.add(new ReloadSubcommand(profileService));
+        }
+
+        this.getCommand("pandaknockback").setExecutor(new CommandExecutionHandler(this, subcommands));
+    }
+}

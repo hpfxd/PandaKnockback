@@ -1,0 +1,47 @@
+default:
+  base:
+    horizontal: 0.4
+    vertical: 0.4
+
+  sprint-bonus:
+    horizontal: 0.5
+    vertical: 0.1
+
+  knockback-enchantment-bonus:
+    horizontal: 0.5
+    vertical: 0.05
+
+  pre-multiplier:
+    horizontal: 0.5
+    vertical: 0.5
+
+  limit:
+    vertical: 0.5
+
+example:
+  base:
+    horizontal:
+      type: uniform
+      min: 0.1
+      max: 0.5
+    vertical: 0.4
+
+  sprint-bonus:
+    horizontal: 0.5
+    vertical: 0.1
+
+  knockback-enchantment-bonus:
+    horizontal: 0.5
+    vertical: 0.1
+
+  pre-multiplier:
+    horizontal: 0.5
+    vertical: 0.5
+
+  limit:
+    vertical: 0.5
+
+  fishing_hook:
+    base:
+      horizontal: 0.4
+      vertical: 0.5

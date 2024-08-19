@@ -1,0 +1,5 @@
+# PandaKnockback configuration
+
+# The default profile active for all players before any other is set. Set to "none" to set no default profile, and the
+# server's built-in knockback will be applied instead if no profile is active.
+default-profile: default
