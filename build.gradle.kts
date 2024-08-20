@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("maven-publish")
 }
 
 group = "com.hpfxd"
@@ -27,6 +28,58 @@ dependencies {
 java {
     targetCompatibility = JavaVersion.VERSION_1_8
     sourceCompatibility = JavaVersion.VERSION_1_8
+
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+            }
+
+            pom {
+                licenses {
+                    license {
+                        name = "GPL-v3.0"
+                        url = "https://www.gnu.org/licenses/gpl-3.0.txt"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "hpfxd"
+                        name = "hpfxd"
+                        email = "me@hpfxd.com"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/hpfxd/PandaKnockback.git"
+                    developerConnection = "scm:git:git://github.com/hpfxd/PandaKnockback.git"
+                    url = "https://github.com/hpfxd/PandaKnockback"
+                }
+            }
+        }
+    }
+
+    findProperty("repository.hpfxd.username")?.let { repoUsername ->
+        repositories {
+            maven {
+                name = "hpfxd-repo"
+                url = uri("https://repo.hpfxd.com/releases/")
+
+                credentials {
+                    username = repoUsername as String
+                    password = findProperty("repository.hpfxd.password") as String
+                }
+            }
+        }
+    }
 }
 
 tasks {

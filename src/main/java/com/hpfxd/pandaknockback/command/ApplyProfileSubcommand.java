@@ -1,7 +1,7 @@
 package com.hpfxd.pandaknockback.command;
 
 import com.hpfxd.pandaknockback.internal.PersistedProfile;
-import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.internal.PersistedProfileService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,9 +13,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ApplyProfileSubcommand extends Subcommand {
-    private final ProfileService profileService;
+    private final PersistedProfileService profileService;
 
-    public ApplyProfileSubcommand(ProfileService profileService) {
+    public ApplyProfileSubcommand(PersistedProfileService profileService) {
         super(
                 Collections.singletonList("applyprofile"),
                 "pandaknockback.applyprofile",

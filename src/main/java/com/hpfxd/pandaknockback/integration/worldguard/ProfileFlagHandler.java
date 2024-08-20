@@ -1,7 +1,7 @@
 package com.hpfxd.pandaknockback.integration.worldguard;
 
 import com.hpfxd.pandaknockback.internal.PersistedProfile;
-import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.internal.PersistedProfileService;
 import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.Set;
 
 public class ProfileFlagHandler extends Handler {
-    private final ProfileService profileService;
+    private final PersistedProfileService profileService;
 
     @Override
     public void initialize(Player player, Location current, ApplicableRegionSet set) {
@@ -41,15 +41,15 @@ public class ProfileFlagHandler extends Handler {
         }
     }
 
-    public ProfileFlagHandler(ProfileService profileService, Session session) {
+    public ProfileFlagHandler(PersistedProfileService profileService, Session session) {
         super(session);
         this.profileService = profileService;
     }
 
     public static class Factory extends Handler.Factory<ProfileFlagHandler> {
-        private final ProfileService profileService;
+        private final PersistedProfileService profileService;
 
-        public Factory(ProfileService profileService) {
+        public Factory(PersistedProfileService profileService) {
             this.profileService = profileService;
         }
 

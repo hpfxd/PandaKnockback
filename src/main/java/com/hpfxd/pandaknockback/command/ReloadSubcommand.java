@@ -1,6 +1,6 @@
 package com.hpfxd.pandaknockback.command;
 
-import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.internal.PersistedProfileService;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ReloadSubcommand extends Subcommand {
-    private final ProfileService profileService;
+    private final PersistedProfileService profileService;
 
-    public ReloadSubcommand(ProfileService profileService) {
+    public ReloadSubcommand(PersistedProfileService profileService) {
         super(
                 Collections.singletonList("reload"),
                 "pandaknockback.reload",

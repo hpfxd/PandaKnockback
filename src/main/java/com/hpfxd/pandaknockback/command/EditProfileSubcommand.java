@@ -2,7 +2,7 @@ package com.hpfxd.pandaknockback.command;
 
 import com.hpfxd.pandaknockback.internal.PersistedProfile;
 import com.hpfxd.pandaknockback.internal.PersistedProfileStorage;
-import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.internal.PersistedProfileService;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,12 +21,12 @@ import java.util.stream.Collectors;
 public class EditProfileSubcommand extends Subcommand {
     private static final Pattern SETTING_KEY_PATTERN = Pattern.compile("[a-z.-]+");
 
-    private final ProfileService profileService;
+    private final PersistedProfileService profileService;
     private final ConfigurationSection defaultProfileSection;
 
     private final List<String> completionKeys;
 
-    public EditProfileSubcommand(ProfileService profileService, ConfigurationSection defaultProfileSection) {
+    public EditProfileSubcommand(PersistedProfileService profileService, ConfigurationSection defaultProfileSection) {
         super(
                 Collections.singletonList("editprofile"),
                 "pandaknockback.editprofile",

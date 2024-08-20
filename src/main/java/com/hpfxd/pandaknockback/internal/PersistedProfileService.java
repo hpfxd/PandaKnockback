@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ProfileService implements KnockbackProfileService, Listener {
+public class PersistedProfileService implements KnockbackProfileService, Listener {
     private final KnockbackPlugin plugin;
 
     private final File profilesFile;
@@ -29,7 +29,7 @@ public class ProfileService implements KnockbackProfileService, Listener {
     private final Map<String, PersistedProfile> profiles = new HashMap<>();
     private KnockbackProfile defaultProfile;
 
-    public ProfileService(KnockbackPlugin plugin) {
+    public PersistedProfileService(KnockbackPlugin plugin) {
         this.plugin = plugin;
         this.profilesFile = new File(this.plugin.getDataFolder(), "profiles.yml");
 

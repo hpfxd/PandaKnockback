@@ -3,7 +3,7 @@ package com.hpfxd.pandaknockback.profile;
 import com.hpfxd.pandaknockback.profile.value.ValueSource;
 
 // oh how I hate Java 8 compatibility (this was a record)
-public class KnockbackSettings {
+public final class KnockbackSettings {
     private final ValueSource baseHorizontal;
     private final ValueSource baseVertical;
     private final ValueSource sprintBonusHorizontal;

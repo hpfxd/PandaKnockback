@@ -20,10 +20,7 @@ default:
 
 example:
   base:
-    horizontal:
-      type: uniform
-      min: 0.1
-      max: 0.5
+    horizontal: 0.1-0.5
     vertical: 0.4
 
   sprint-bonus:

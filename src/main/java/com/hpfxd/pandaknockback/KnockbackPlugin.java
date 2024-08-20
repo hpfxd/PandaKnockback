@@ -6,7 +6,7 @@ import com.hpfxd.pandaknockback.command.EditProfileSubcommand;
 import com.hpfxd.pandaknockback.command.ReloadSubcommand;
 import com.hpfxd.pandaknockback.command.Subcommand;
 import com.hpfxd.pandaknockback.integration.worldguard.WorldGuardIntegration;
-import com.hpfxd.pandaknockback.internal.ProfileService;
+import com.hpfxd.pandaknockback.internal.PersistedProfileService;
 import com.hpfxd.pandaknockback.profile.KnockbackProfileService;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -46,7 +46,7 @@ public class KnockbackPlugin extends JavaPlugin {
     }
 
     private void setupProfileService() {
-        final ProfileService profileService = new ProfileService(this);
+        final PersistedProfileService profileService = new PersistedProfileService(this);
         Bukkit.getPluginManager().registerEvents(profileService, this);
         Bukkit.getServicesManager().register(KnockbackProfileService.class, profileService, this, ServicePriority.Lowest);
 
@@ -58,8 +58,8 @@ public class KnockbackPlugin extends JavaPlugin {
         final List<Subcommand> subcommands = new ArrayList<>();
 
         final KnockbackProfileService registeredService = Bukkit.getServicesManager().load(KnockbackProfileService.class);
-        if (registeredService instanceof ProfileService) {
-            final ProfileService profileService = (ProfileService) registeredService;
+        if (registeredService instanceof PersistedProfileService) {
+            final PersistedProfileService profileService = (PersistedProfileService) registeredService;
 
             // these subcommands require the built-in ProfileService to be used
 
