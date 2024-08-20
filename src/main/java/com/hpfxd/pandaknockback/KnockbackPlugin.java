@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KnockbackPlugin extends JavaPlugin {
+    private static final int METRICS_ID = 23110;
+
     @Override
     public void onLoad() {
         if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
@@ -36,6 +38,8 @@ public class KnockbackPlugin extends JavaPlugin {
         if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
             WorldGuardIntegration.registerHandler();
         }
+
+        this.setupMetrics();
     }
 
     private void setupAttackListener() {
@@ -69,5 +73,9 @@ public class KnockbackPlugin extends JavaPlugin {
         }
 
         this.getCommand("pandaknockback").setExecutor(new CommandExecutionHandler(this, subcommands));
+    }
+
+    private void setupMetrics() {
+        new Metrics(this, METRICS_ID);
     }
 }
